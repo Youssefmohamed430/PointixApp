@@ -10,7 +10,7 @@ namespace PointixApp.DataLayer.Entities
     {
         public int NotifId { get; set; }
         public string Message { get; set; }
-        public bool IsRead { get; set; }
+        public bool? IsRead { get; set; }
         public DateTime NotifDate { get; set; }
         public List<UserNotification> userNotification { get; set; }
     }

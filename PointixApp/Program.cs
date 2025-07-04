@@ -1,3 +1,9 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using PointixApp.DataLayer;
+
 namespace PointixApp
 {
     internal static class Program
@@ -8,10 +14,36 @@ namespace PointixApp
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+
+            // Create the host (dependency injection container)
+            var host = CreateHostBuilder().Build();
+
+            // Resolve Form1 from DI container
+            var form = host.Services.GetRequiredService<Form1>();
+
+            Application.Run(form);
+        }
+
+        static IHostBuilder CreateHostBuilder()
+        {
+            return Host.CreateDefaultBuilder()
+                .ConfigureAppConfiguration((context, config) =>
+                {
+                    config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+                })
+                .ConfigureServices((context, services) =>
+                {
+                    // Read connection string from appsettings.json
+                    var connectionString = context.Configuration.GetConnectionString("constr");
+
+                    // Register DbContext
+                    services.AddDbContext<AppDbContext>(options =>
+                        options.UseSqlServer(connectionString));
+
+                    // Register Forms
+                    services.AddScoped<Form1>();
+                });
         }
     }
 }
