@@ -20,7 +20,7 @@ namespace PointixApp
             var host = CreateHostBuilder().Build();
 
             // Resolve Form1 from DI container
-            var form = host.Services.GetRequiredService<Form1>();
+            var form = host.Services.GetRequiredService<LogInForm>();
 
             Application.Run(form);
         }
@@ -42,7 +42,7 @@ namespace PointixApp
                         options.UseSqlServer(connectionString));
 
                     // Register Forms
-                    services.AddScoped<Form1>();
+                    services.AddScoped<LogInForm>();
                 });
         }
     }
