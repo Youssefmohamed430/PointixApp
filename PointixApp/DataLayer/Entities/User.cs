@@ -13,6 +13,7 @@ namespace PointixApp.DataLayer.Entities
         public string UserName { get; set; }
         public string Password { get; set; }
         public Roles Role { get; set; }
+        public bool IsDeleted { get; set; } = false;
         public List<Sale> Sales { get; set; }
         public List<InventoryLog> inventoryLog { get; set; }
         public List<UserNotification> userNotification { get; set; }

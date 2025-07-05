@@ -13,6 +13,7 @@ namespace PointixApp.DataLayer.Entities
         public DateTime ExpireDate { get; set; }
         public int Quantity { get; set; }
         public double Price { get; set; }
+        public bool IsDeleted { get; set; } = false;
         public List<SaleItem> saleItem { get; set; }
         public List<InventoryLog> inventoryLog { get; set; }
     }
