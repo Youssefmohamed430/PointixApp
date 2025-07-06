@@ -19,5 +19,6 @@ namespace PointixApp.DataLayer.Entities
         public List<UserNotification> userNotification { get; set; }
 
     }
-    public enum Roles { admin , staff}
+    public enum Roles { admin , staff} // at  data base 1 => admin 
+                                       //               0 => staff         
 }
